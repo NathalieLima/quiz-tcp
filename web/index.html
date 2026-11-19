@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz TCP</title>
+  <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Quiz TCP</h1>
+    <p id="identidade" class="identidade"></p>
+  </header>
+
+  <main id="palco" class="palco">
+
+    <!-- Entrada: escolha do nome (LOGIN) -->
+    <section id="tela-entrada" class="tela cartao">
+      <h2>Entrar no jogo</h2>
+      <form id="form-nome" autocomplete="off">
+        <label for="campo-nome">Seu nome</label>
+        <input id="campo-nome" type="text" maxlength="16" placeholder="ex.: ana_01" autofocus>
+        <p class="dica">De 3 a 16 caracteres: letras sem acento, dígitos ou _.</p>
+        <button type="submit" class="botao principal">Entrar</button>
+      </form>
+      <p class="erro" role="alert"></p>
+    </section>
+
+    <!-- Saguão: criar sala (CREATE) ou entrar com código (JOIN) -->
+    <section id="tela-saguao" class="tela cartao" hidden>
+      <h2>Saguão</h2>
+      <div class="duas-colunas">
+        <div class="bloco">
+          <h3>Criar uma sala</h3>
+          <p class="dica">Você será o anfitrião e receberá um código para passar aos outros jogadores.</p>
+          <button id="botao-criar" type="button" class="botao principal">Criar sala</button>
+        </div>
+        <form id="form-codigo" class="bloco" autocomplete="off">
+          <h3>Entrar em uma sala</h3>
+          <label for="campo-codigo">Código da sala</label>
+          <input id="campo-codigo" type="text" maxlength="4" class="campo-codigo" placeholder="K7QD">
+          <button type="submit" class="botao principal">Entrar na sala</button>
+        </form>
+      </div>
+      <p class="erro" role="alert"></p>
+      <button id="botao-encerrar" type="button" class="botao discreto">Encerrar sessão</button>
+    </section>
+
+    <!-- Lobby da sala -->
+    <section id="tela-sala" class="tela cartao" hidden>
+      <h2>Sala</h2>
+      <p class="rotulo">Código da sala</p>
+      <p id="sala-codigo" class="codigo-sala"></p>
+      <h3>Jogadores <span id="sala-contagem" class="contagem"></span></h3>
+      <ul id="sala-jogadores" class="lista-jogadores"></ul>
+      <p id="sala-situacao" class="dica"></p>
+      <p class="erro" role="alert"></p>
+      <div class="acoes">
+        <button id="botao-iniciar" type="button" class="botao principal" hidden>Iniciar partida</button>
+        <button id="botao-sair-sala" type="button" class="botao discreto">Sair da sala</button>
+      </div>
+    </section>
+
+    <!-- Espera: início da partida ou retorno no meio de uma pergunta -->
+    <section id="tela-espera" class="tela cartao" hidden>
+      <h2 id="espera-titulo">Aguarde</h2>
+      <p id="espera-texto" class="texto-grande"></p>
+      <button id="botao-sair-espera" type="button" class="botao discreto">Sair da sala</button>
+    </section>
+
+    <!-- Pergunta -->
+    <section id="tela-pergunta" class="tela" hidden>
+      <div class="cabecalho-pergunta">
+        <p id="pergunta-numero" class="rotulo"></p>
+        <p id="pergunta-segundos" class="segundos" aria-live="off"></p>
+      </div>
+      <div class="barra-tempo" aria-hidden="true"><div id="barra-tempo-preenchida" class="barra-tempo-preenchida"></div></div>
+      <h2 id="pergunta-texto" class="pergunta-texto"></h2>
+      <div class="opcoes">
+        <button type="button" class="opcao opcao-a" data-letra="A"><span class="letra">A</span><span class="opcao-texto"></span></button>
+        <button type="button" class="opcao opcao-b" data-letra="B"><span class="letra">B</span><span class="opcao-texto"></span></button>
+        <button type="button" class="opcao opcao-c" data-letra="C"><span class="letra">C</span><span class="opcao-texto"></span></button>
+        <button type="button" class="opcao opcao-d" data-letra="D"><span class="letra">D</span><span class="opcao-texto"></span></button>
+      </div>
+      <p id="pergunta-situacao" class="situacao" aria-live="polite"></p>
+      <p id="pergunta-contagem" class="contagem-respostas"></p>
+      <p class="erro" role="alert"></p>
+    </section>
+
+    <!-- Resultado da pergunta e ranking -->
+    <section id="tela-resultado" class="tela cartao" hidden>
+      <p id="resultado-numero" class="rotulo"></p>
+      <h2 id="resultado-titulo" class="resultado-titulo"></h2>
+      <p id="resultado-correta" class="texto-grande"></p>
+      <p id="resultado-minha" class="dica"></p>
+      <div class="placar">
+        <div><span class="rotulo">Pontos nesta pergunta</span><strong id="resultado-pontos"></strong></div>
+        <div><span class="rotulo">Seu total</span><strong id="resultado-total"></strong></div>
+      </div>
+      <h3>Ranking</h3>
+      <table class="ranking">
+        <thead><tr><th scope="col">Posição</th><th scope="col">Jogador</th><th scope="col">Pontos</th></tr></thead>
+        <tbody id="ranking-parcial"></tbody>
+      </table>
+      <p id="resultado-proxima" class="dica"></p>
+    </section>
+
+    <!-- Fim da partida -->
+    <section id="tela-final" class="tela cartao" hidden>
+      <p class="rotulo">Fim da partida</p>
+      <h2 class="resultado-titulo">Vencedor: <span id="final-vencedor"></span></h2>
+      <p id="final-pontos" class="texto-grande"></p>
+      <h3>Ranking final</h3>
+      <table class="ranking">
+        <thead><tr><th scope="col">Posição</th><th scope="col">Jogador</th><th scope="col">Pontos</th></tr></thead>
+        <tbody id="ranking-final"></tbody>
+      </table>
+      <div class="acoes">
+        <button id="botao-voltar-sala" type="button" class="botao principal">Voltar à sala</button>
+      </div>
+    </section>
+
+    <!-- Conexão encerrada -->
+    <section id="tela-queda" class="tela cartao" hidden>
+      <h2 id="queda-titulo">Conexão encerrada</h2>
+      <p id="queda-texto" class="texto-grande"></p>
+    </section>
+  </main>
+
+  <div id="avisos" class="avisos" aria-live="polite"></div>
+
+  <details id="painel-protocolo" class="protocolo">
+    <summary>Protocolo: linhas brutas do socket TCP <span id="protocolo-contagem" class="contagem"></span></summary>
+    <p class="protocolo-legenda"><span class="enviada">&gt;&gt; enviada ao servidor</span> <span class="recebida">&lt;&lt; recebida do servidor</span></p>
+    <div id="protocolo-linhas" class="protocolo-linhas" tabindex="0"></div>
+  </details>
+
+  <script src="/app.js"></script>
+</body>
+</html>

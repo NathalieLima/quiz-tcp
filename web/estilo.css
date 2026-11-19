@@ -1,0 +1,547 @@
+/* Estilo do Quiz TCP. Sem fontes, imagens ou bibliotecas externas:
+   a página funciona sem internet. Cores escolhidas para boa leitura em projetor. */
+
+:root {
+  --fundo: #eef1f8;
+  --cartao: #ffffff;
+  --texto: #111827;
+  --texto-suave: #4b5563;
+  --borda: #cbd5e1;
+  --primaria: #1e3a8a;
+  --primaria-escura: #172554;
+  --certo: #166534;
+  --errado: #991b1b;
+  --opcao-a: #1d4ed8;
+  --opcao-b: #b91c1c;
+  --opcao-c: #047857;
+  --opcao-d: #6d28d9;
+  --painel-fundo: #0f172a;
+  --painel-texto: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+  line-height: 1.45;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* ---- Topo ---- */
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.7rem 1.25rem;
+  background: var(--primaria-escura);
+  color: #ffffff;
+}
+
+.topo h1 {
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+
+.identidade {
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
+/* ---- Área principal ---- */
+
+.palco {
+  flex: 1;
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2rem;
+}
+
+.cartao {
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+.cartao > * + * {
+  margin-top: 0.9rem;
+}
+
+h2 {
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+.rotulo {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.dica {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+.texto-grande {
+  font-size: 1.25rem;
+}
+
+.contagem {
+  font-weight: 400;
+  color: var(--texto-suave);
+}
+
+.erro {
+  color: var(--errado);
+  font-weight: 700;
+}
+
+.erro:empty {
+  display: none;
+}
+
+/* ---- Formulários e botões ---- */
+
+form > * + *,
+.bloco > * + * {
+  margin-top: 0.6rem;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+}
+
+input[type="text"] {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid var(--borda);
+  border-radius: 0.5rem;
+  font: inherit;
+  font-size: 1.2rem;
+  color: var(--texto);
+  background: #ffffff;
+}
+
+.campo-codigo {
+  max-width: 10rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+}
+
+.botao {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao.principal {
+  background: var(--primaria);
+  color: #ffffff;
+}
+
+.botao.principal:hover {
+  background: var(--primaria-escura);
+}
+
+.botao.discreto {
+  background: #ffffff;
+  border-color: var(--borda);
+  color: var(--texto);
+}
+
+.botao.discreto:hover {
+  background: var(--fundo);
+}
+
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+.protocolo-linhas:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.duas-colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.bloco {
+  padding: 1rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.6rem;
+  background: #f8fafc;
+}
+
+/* ---- Lobby da sala ---- */
+
+.codigo-sala {
+  margin-top: 0.2rem;
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  line-height: 1.1;
+  color: var(--primaria);
+}
+
+.lista-jogadores {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 0.5rem;
+}
+
+.lista-jogadores li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.etiqueta {
+  padding: 0.05rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.etiqueta-host {
+  background: var(--primaria);
+  color: #ffffff;
+}
+
+.etiqueta-voce {
+  background: #e2e8f0;
+  color: var(--texto);
+}
+
+/* ---- Pergunta ---- */
+
+.cabecalho-pergunta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.segundos {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.barra-tempo {
+  height: 0.9rem;
+  margin-top: 0.4rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.barra-tempo-preenchida {
+  width: 100%;
+  height: 100%;
+  background: var(--primaria);
+  transition: width 0.1s linear;
+}
+
+.pergunta-texto {
+  margin: 1.25rem 0;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.opcoes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 5.5rem;
+  padding: 0.9rem 1.1rem;
+  border: 4px solid transparent;
+  border-radius: 0.75rem;
+  color: #ffffff;
+  font: inherit;
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.opcao-a { background: var(--opcao-a); }
+.opcao-b { background: var(--opcao-b); }
+.opcao-c { background: var(--opcao-c); }
+.opcao-d { background: var(--opcao-d); }
+
+.opcao .letra {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--texto);
+  font-size: 1.4rem;
+}
+
+.opcao:not(:disabled):hover {
+  filter: brightness(1.12);
+}
+
+/* Opções desabilitadas ficam apagadas; a escolhida continua em destaque,
+   com borda e com o texto "sua resposta" (não depende só da cor). */
+.opcao:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.opcao.escolhida {
+  opacity: 1;
+  border-color: var(--texto);
+  box-shadow: 0 0 0 3px #ffffff inset;
+}
+
+.opcao.escolhida .opcao-texto::after {
+  content: "  (sua resposta)";
+  font-weight: 400;
+}
+
+.situacao,
+.contagem-respostas {
+  margin-top: 0.9rem;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.contagem-respostas {
+  font-weight: 700;
+}
+
+#tela-pergunta .erro {
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+/* ---- Resultado e ranking ---- */
+
+.resultado-titulo {
+  font-size: 2.2rem;
+}
+
+.resultado-titulo.certo {
+  color: var(--certo);
+}
+
+.resultado-titulo.errado {
+  color: var(--errado);
+}
+
+.placar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.placar > div {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.6rem;
+  background: #f8fafc;
+}
+
+.placar strong {
+  display: block;
+  font-size: 2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.15rem;
+}
+
+.ranking th,
+.ranking td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--borda);
+  text-align: left;
+}
+
+.ranking th {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.ranking td:last-child,
+.ranking th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking .minha-linha td {
+  background: #dbeafe;
+  font-weight: 700;
+}
+
+/* ---- Avisos passageiros ---- */
+
+.avisos {
+  position: fixed;
+  top: 4rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(24rem, calc(100vw - 2rem));
+}
+
+.aviso {
+  padding: 0.7rem 1rem;
+  border-left: 6px solid #f59e0b;
+  border-radius: 0.5rem;
+  background: var(--painel-fundo);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+}
+
+/* ---- Painel "Protocolo" ---- */
+
+.protocolo {
+  position: sticky;
+  bottom: 0;
+  background: var(--painel-fundo);
+  color: var(--painel-texto);
+  border-top: 3px solid #f59e0b;
+}
+
+.protocolo summary {
+  padding: 0.6rem 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.protocolo .contagem {
+  color: #94a3b8;
+}
+
+.protocolo-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding: 0 1.25rem 0.4rem;
+  font-size: 0.85rem;
+}
+
+.protocolo-linhas {
+  height: 30vh;
+  overflow-y: auto;
+  padding: 0.25rem 1.25rem 0.75rem;
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+.linha-protocolo {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.protocolo .enviada {
+  color: #fcd34d;
+}
+
+.protocolo .recebida {
+  color: #7dd3fc;
+}
+
+/* ---- Telas pequenas ---- */
+
+@media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+
+  .opcoes {
+    grid-template-columns: 1fr;
+  }
+
+  .pergunta-texto {
+    font-size: 1.5rem;
+  }
+
+  .codigo-sala {
+    font-size: 2.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra-tempo-preenchida {
+    transition: none;
+  }
+}

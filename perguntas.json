@@ -1,0 +1,152 @@
+[
+  {
+    "texto": "Qual camada do modelo TCP/IP usa portas?",
+    "opcoes": ["Enlace", "Transporte", "Rede", "Física"],
+    "correta": "B"
+  },
+  {
+    "texto": "Qual protocolo de transporte garante entrega confiável e ordenada dos dados?",
+    "opcoes": ["UDP", "IP", "TCP", "ICMP"],
+    "correta": "C"
+  },
+  {
+    "texto": "Quantos segmentos são trocados no estabelecimento de uma conexão TCP (handshake)?",
+    "opcoes": ["1", "3", "2", "4"],
+    "correta": "B"
+  },
+  {
+    "texto": "Qual flag do cabeçalho TCP é usada para iniciar o estabelecimento de uma conexão?",
+    "opcoes": ["FIN", "ACK", "RST", "SYN"],
+    "correta": "D"
+  },
+  {
+    "texto": "Qual é a porta padrão do protocolo HTTP?",
+    "opcoes": ["21", "25", "80", "443"],
+    "correta": "C"
+  },
+  {
+    "texto": "Qual é a porta padrão do protocolo HTTPS?",
+    "opcoes": ["22", "53", "110", "443"],
+    "correta": "D"
+  },
+  {
+    "texto": "Qual é a porta padrão do protocolo SSH?",
+    "opcoes": ["22", "23", "25", "53"],
+    "correta": "A"
+  },
+  {
+    "texto": "Qual é a principal função do DNS?",
+    "opcoes": [
+      "Traduzir nomes de domínio em endereços IP",
+      "Atribuir endereços IP automaticamente às máquinas",
+      "Criptografar o tráfego entre cliente e servidor",
+      "Escolher a rota dos pacotes entre redes"
+    ],
+    "correta": "A"
+  },
+  {
+    "texto": "Qual protocolo de transporte o DNS usa na maioria das consultas?",
+    "opcoes": ["TCP", "UDP", "ICMP", "ARP"],
+    "correta": "B"
+  },
+  {
+    "texto": "Quantos bits tem um endereço IPv4?",
+    "opcoes": ["16", "32", "64", "128"],
+    "correta": "B"
+  },
+  {
+    "texto": "Quantos bits tem um endereço IPv6?",
+    "opcoes": ["32", "48", "64", "128"],
+    "correta": "D"
+  },
+  {
+    "texto": "Qual destes é o endereço IPv4 de loopback, que aponta para a própria máquina?",
+    "opcoes": ["192.168.0.1", "10.0.0.1", "127.0.0.1", "255.255.255.255"],
+    "correta": "C"
+  },
+  {
+    "texto": "Qual máscara de sub-rede corresponde ao prefixo /24?",
+    "opcoes": ["255.0.0.0", "255.255.0.0", "255.255.255.0", "255.255.255.255"],
+    "correta": "C"
+  },
+  {
+    "texto": "Quantos endereços podem ser atribuídos a hosts em uma rede IPv4 /24?",
+    "opcoes": ["256", "254", "255", "128"],
+    "correta": "B"
+  },
+  {
+    "texto": "Qual destas faixas é reservada para endereços IPv4 privados (RFC 1918)?",
+    "opcoes": ["8.8.8.0/24", "172.32.0.0/16", "192.168.0.0/16", "169.254.0.0/16"],
+    "correta": "C"
+  },
+  {
+    "texto": "Na API de sockets, qual chamada associa um socket a um endereço IP e a uma porta locais?",
+    "opcoes": ["listen", "bind", "connect", "accept"],
+    "correta": "B"
+  },
+  {
+    "texto": "Em um servidor TCP, qual chamada devolve um novo socket para conversar com o cliente que acabou de se conectar?",
+    "opcoes": ["accept", "listen", "bind", "send"],
+    "correta": "A"
+  },
+  {
+    "texto": "Qual par de valores identifica uma das pontas de uma conexão TCP?",
+    "opcoes": [
+      "Endereço MAC e endereço IP",
+      "Endereço IP e número de porta",
+      "Número de porta e nome do protocolo",
+      "Endereço MAC e número de porta"
+    ],
+    "correta": "B"
+  },
+  {
+    "texto": "Qual protocolo atribui endereços IP automaticamente às máquinas de uma rede?",
+    "opcoes": ["DNS", "ARP", "DHCP", "SMTP"],
+    "correta": "C"
+  },
+  {
+    "texto": "Qual protocolo descobre o endereço MAC correspondente a um endereço IPv4 da rede local?",
+    "opcoes": ["DNS", "ICMP", "DHCP", "ARP"],
+    "correta": "D"
+  },
+  {
+    "texto": "Qual protocolo o comando ping utiliza?",
+    "opcoes": ["ICMP", "TCP", "UDP", "ARP"],
+    "correta": "A"
+  },
+  {
+    "texto": "Qual método HTTP é usado para solicitar um recurso sem alterá-lo no servidor?",
+    "opcoes": ["POST", "GET", "PUT", "DELETE"],
+    "correta": "B"
+  },
+  {
+    "texto": "Qual código de status HTTP indica que o recurso solicitado não foi encontrado?",
+    "opcoes": ["200", "301", "404", "500"],
+    "correta": "C"
+  },
+  {
+    "texto": "Quantos bytes tem o cabeçalho de um datagrama UDP?",
+    "opcoes": ["8", "20", "32", "60"],
+    "correta": "A"
+  },
+  {
+    "texto": "Qual é o tamanho mínimo do cabeçalho TCP, sem opções?",
+    "opcoes": ["8 bytes", "16 bytes", "20 bytes", "40 bytes"],
+    "correta": "C"
+  },
+  {
+    "texto": "Qual protocolo de transporte é mais indicado para uma chamada de voz em tempo real, que tolera perdas mas não atrasos?",
+    "opcoes": ["TCP", "UDP", "FTP", "SMTP"],
+    "correta": "B"
+  },
+  {
+    "texto": "Em qual camada do modelo OSI um roteador atua ao encaminhar pacotes IP?",
+    "opcoes": ["Física", "Enlace", "Rede", "Transporte"],
+    "correta": "C"
+  },
+  {
+    "texto": "Qual protocolo é usado para enviar e-mails de um servidor de correio para outro?",
+    "opcoes": ["IMAP", "POP3", "SMTP", "FTP"],
+    "correta": "C"
+  }
+]
