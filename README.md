@@ -112,7 +112,7 @@ python --version
 No Linux e no macOS o comando costuma ser `python3`; no Windows também funciona `py`. Use o mesmo comando no lugar de `python` nos exemplos abaixo. Não há nada para instalar com `pip`.
 
 ```bash
-git clone [link do repositório]
+git clone https://github.com/NathalieLima/quiz-tcp.git
 cd quiz-tcp
 ```
 
